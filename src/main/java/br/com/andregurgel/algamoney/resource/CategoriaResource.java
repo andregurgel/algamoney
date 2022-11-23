@@ -4,6 +4,7 @@ import br.com.andregurgel.algamoney.model.Categoria;
 import br.com.andregurgel.algamoney.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import static java.util.Objects.nonNull;
 
 @RestController
 @RequestMapping("/categorias")
@@ -27,8 +30,13 @@ public class CategoriaResource {
     }
 
     @GetMapping("/{categoriaId}")
-    public Categoria findOne(@PathVariable Long categoriaId) {
-        return categoriaRepository.findOne(categoriaId);
+    public ResponseEntity<?> findOne(@PathVariable Long categoriaId) {
+        Categoria categoria = categoriaRepository.findOne(categoriaId);
+        if (nonNull(categoria)) {
+            return ResponseEntity.ok(categoria);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping
