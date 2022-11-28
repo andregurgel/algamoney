@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static java.util.Objects.nonNull;
@@ -41,7 +42,7 @@ public class CategoriaResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Categoria insert(@RequestBody Categoria categoria) {
+    public Categoria insert(@Valid @RequestBody Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
 }
