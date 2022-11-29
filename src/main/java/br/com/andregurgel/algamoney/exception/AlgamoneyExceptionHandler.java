@@ -41,12 +41,8 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({ EmptyResultDataAccessException.class })
-    public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
-        String mensagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
-        String mensagemDev = ex.toString();
-        List<Erro> erroList = Collections.singletonList(new Erro(mensagemUsuario, mensagemDev));
-        return handleExceptionInternal(ex, erroList, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
-    }
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public void handleEmptyResultDataAccessException() { }
 
     private List<Erro> criarListaDeErros(BindingResult bindingResult) {
         List<Erro> erroList = new ArrayList<>();
