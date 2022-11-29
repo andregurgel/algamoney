@@ -60,6 +60,12 @@ public class PessoaResource {
         return ResponseEntity.ok(pessoaService.update(pessoaId, pessoa));
     }
 
+    @PutMapping("/{pessoaId}/ativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateAtivo(@PathVariable Long pessoaId, @RequestBody Boolean ativo) {
+        pessoaService.updateAtivo(pessoaId, ativo);
+    }
+
     @DeleteMapping("/{pessoaId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long pessoaId) {

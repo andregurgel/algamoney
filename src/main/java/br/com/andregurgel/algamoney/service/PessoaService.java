@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Service
@@ -17,10 +18,19 @@ public class PessoaService {
 
     public Pessoa update(Long codigo, Pessoa pessoa) {
         Pessoa oldPessoa = pessoaRepository.findOne(codigo);
-        if (nonNull(oldPessoa)) {
+        if (isNull(oldPessoa)) {
             throw new EmptyResultDataAccessException(1);
         }
         BeanUtils.copyProperties(pessoa, oldPessoa, "codigo");
         return pessoaRepository.save(oldPessoa);
+    }
+
+    public void updateAtivo(Long codigo, Boolean ativo) {
+        Pessoa oldPessoa = pessoaRepository.findOne(codigo);
+        if (isNull(oldPessoa)) {
+            throw new EmptyResultDataAccessException(1);
+        }
+        oldPessoa.setAtivo(ativo);
+        pessoaRepository.save(oldPessoa);
     }
 }
