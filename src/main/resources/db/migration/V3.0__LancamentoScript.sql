@@ -9,5 +9,5 @@ CREATE TABLE lancamento (
     codigo_categoria BIGINT(20) NOT NULL,
     codigo_pessoa BIGINT(20) NOT NULL,
     FOREIGN KEY (codigo_categoria) REFERENCES categoria(codigo),
-    FOREIGN KEY (codigo_pessoa) REFERENCES pessoa(codigo),
+    FOREIGN KEY (codigo_pessoa) REFERENCES pessoa(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
