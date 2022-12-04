@@ -40,8 +40,8 @@ public class PessoaResource {
     }
 
     @GetMapping("/{pessoaId}")
-    public ResponseEntity<?> findOne(@PathVariable Long pessoaId) {
-        Pessoa pessoa = pessoaRepository.findOne(pessoaId);
+    public ResponseEntity<?> findById(@PathVariable Long pessoaId) {
+        Pessoa pessoa = pessoaRepository.findById(pessoaId).orElseThrow(null);
         if (nonNull(pessoa)) {
             return ResponseEntity.ok(pessoa);
         } else {
@@ -69,6 +69,6 @@ public class PessoaResource {
     @DeleteMapping("/{pessoaId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long pessoaId) {
-        pessoaRepository.delete(pessoaId);
+        pessoaRepository.deleteById(pessoaId);
     }
 }

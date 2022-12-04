@@ -17,8 +17,8 @@ public class LancamentoService {
         return lancamentoRepository.findAll();
     }
 
-    public Lancamento findOne(Long codigo) {
-        return lancamentoRepository.findOne(codigo);
+    public Lancamento findById(Long codigo) {
+        return lancamentoRepository.findById(codigo).orElseThrow(null);
     }
 
     public Lancamento insert(Lancamento lancamento) {

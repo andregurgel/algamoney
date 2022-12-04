@@ -3,6 +3,7 @@ package br.com.andregurgel.algamoney.exception;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,10 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({ EmptyResultDataAccessException.class })
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void handleEmptyResultDataAccessException() { }
+
+    @ExceptionHandler({ DataIntegrityViolationException.class })
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void handleDataIntegrityViolationException() { }
 
     private List<Erro> criarListaDeErros(BindingResult bindingResult) {
         List<Erro> erroList = new ArrayList<>();

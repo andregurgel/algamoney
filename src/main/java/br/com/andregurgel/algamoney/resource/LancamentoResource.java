@@ -32,8 +32,8 @@ public class LancamentoResource {
     }
 
     @GetMapping("/{lancamentoId}")
-    public ResponseEntity<Lancamento> findOne(@PathVariable Long lancamentoId) {
-        Lancamento lancamento = lancamentoService.findOne(lancamentoId);
+    public ResponseEntity<Lancamento> findById(@PathVariable Long lancamentoId) {
+        Lancamento lancamento = lancamentoService.findById(lancamentoId);
         if (nonNull(lancamento)) {
             return ResponseEntity.ok(lancamento);
         } else {

@@ -17,7 +17,7 @@ public class PessoaService {
     private PessoaRepository pessoaRepository;
 
     public Pessoa update(Long codigo, Pessoa pessoa) {
-        Pessoa oldPessoa = pessoaRepository.findOne(codigo);
+        Pessoa oldPessoa = pessoaRepository.findById(codigo).orElseThrow(null);
         if (isNull(oldPessoa)) {
             throw new EmptyResultDataAccessException(1);
         }
@@ -26,7 +26,7 @@ public class PessoaService {
     }
 
     public void updateAtivo(Long codigo, Boolean ativo) {
-        Pessoa oldPessoa = pessoaRepository.findOne(codigo);
+        Pessoa oldPessoa = pessoaRepository.findById(codigo).orElseThrow(null);
         if (isNull(oldPessoa)) {
             throw new EmptyResultDataAccessException(1);
         }

@@ -32,7 +32,7 @@ public class CategoriaResource {
 
     @GetMapping("/{categoriaId}")
     public ResponseEntity<?> findOne(@PathVariable Long categoriaId) {
-        Categoria categoria = categoriaRepository.findOne(categoriaId);
+        Categoria categoria = categoriaRepository.findById(categoriaId).orElseThrow(null);
         if (nonNull(categoria)) {
             return ResponseEntity.ok(categoria);
         } else {
