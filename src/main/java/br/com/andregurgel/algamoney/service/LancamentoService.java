@@ -2,7 +2,8 @@ package br.com.andregurgel.algamoney.service;
 
 import br.com.andregurgel.algamoney.model.Lancamento;
 import br.com.andregurgel.algamoney.model.Pessoa;
-import br.com.andregurgel.algamoney.repository.LancamentoRepository;
+import br.com.andregurgel.algamoney.repository.lancamento.LancamentoRepository;
+import br.com.andregurgel.algamoney.repository.lancamento.LancamentoFilter;
 import br.com.andregurgel.algamoney.service.exception.PessoaInativaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,10 @@ public class LancamentoService {
 
     public List<Lancamento> findAll() {
         return lancamentoRepository.findAll();
+    }
+
+    public List<Lancamento> findAllFiltered(LancamentoFilter lancamentoFilter) {
+        return lancamentoRepository.filter(lancamentoFilter);
     }
 
     public Lancamento findById(Long codigo) {
